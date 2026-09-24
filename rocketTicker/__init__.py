@@ -1,8 +1,5 @@
 # =============================================================================
 # Rocket Ticker — Blinky 2350 / Badgeware 3.0.2
-#
-# Created by: @io9k
-# instagram.com/io9k
 # =============================================================================
 
 import wifi
@@ -17,7 +14,7 @@ wlan = network.WLAN(network.STA_IF)
 # -----------------------------------------------------------------------------
 # Tickers + Yahoo
 # -----------------------------------------------------------------------------
-TICKERS = ["GME", "EBAY", "SPCX", "SPY"]     #<-------------CHANGE TICKERS HERE
+TICKERS = ["GME", "EBAY", "SPCX", "SPY"]
 ticker_index = 0
 TICKER = TICKERS[ticker_index]
 REFRESH_MS = 15000
@@ -31,10 +28,10 @@ def make_url(sym):
 URL = make_url(TICKER)
 
 NETWORKS = [
-    ("Wifi_SSID_1", "WifiPass"),             #<-------------CHANGE WIFI AP HERE
-    ("Wifi_SSID_2", "WifiPass"),
-    ("Wifi_SSID_3", "WifiPass"),
-    ("Wifi_SSID_4", "WifiPass"),
+    ("Kilo-Guest-1", "KiloClub"),
+    ("Air42", "3049kilo"),
+    ("io9k", "3049kilo"),
+    ("Stone4K.com Starlink", "populous"),
 ]
 net_index = 0
 net_try_at = 0
@@ -46,7 +43,7 @@ wifi_note = ""
 # Price text + scatter
 # -----------------------------------------------------------------------------
 ANIM = "scatter"
-ANIM_MS = 2500
+ANIM_MS = 3000
 PARTICLE_COUNT = 1
 SCAT_GRAV = 0.02
 TICKER_Y = 0
@@ -346,11 +343,12 @@ def update_star_speed():
         mag = price_val - prev_close
         if mag < 0:
             mag = -mag
-    t = mag * 0.1
-    if t > 8:
-        t = 8
-    fade = 1.0 - (1.0 / (1.0 + t + t * t * 0.5))
-    star_spd = 0.06 + 0.54 * fade
+    t = mag / 1.00 
+    if t > 1:
+        t = 1
+    t = t * t
+    #fade = 1.0 - (1.0 / (1.0 + t + t * t * 0.5))
+    star_spd = 0.10 + 1.0 * t
     arm_rear_alert()
 
 
@@ -690,3 +688,4 @@ def update():
 
 
 run(update)
+
